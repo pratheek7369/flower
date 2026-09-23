@@ -1,0 +1,19 @@
+{
+  "name": "flower-marketplace-platform",
+  "version": "1.0.0",
+  "description": "Production-grade full-stack multi-vendor fresh flower e-commerce platform with AI-powered floral & logistics intelligence",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "start": "npm --prefix server run start",
+    "type-check": "npm --prefix server run type-check && npm --prefix client run type-check"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
