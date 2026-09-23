@@ -4,8 +4,8 @@
 
 import { Router, Request, Response } from 'express';
 import { db } from '../db/database.js';
-import { UserRoleSchema } from '@shared/schemas';
-import { UserRole } from '@shared/types';
+import { UserRoleSchema } from '../shared/schemas.js';
+import { UserRole } from '../shared/types.js';
 
 export const authRouter = Router();
 

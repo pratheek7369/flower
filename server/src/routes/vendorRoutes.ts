@@ -4,7 +4,7 @@
 
 import { Router, Request, Response } from 'express';
 import { db } from '../db/database.js';
-import { PinCodeCheckSchema } from '@shared/schemas';
+import { PinCodeCheckSchema } from '../shared/schemas.js';
 
 export const vendorRouter = Router();
 

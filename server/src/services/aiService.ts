@@ -8,11 +8,11 @@ import {
   FloralCareGuideSchema, 
   PerishabilityRiskAssessmentSchema, 
   LogisticsRoutingNoteSchema 
-} from '@shared/schemas';
+} from '../shared/schemas.js';
 import { 
   FloralCareGuide, 
   PerishabilityRiskAssessment 
-} from '@shared/types';
+} from '../shared/types.js';
 import { config } from '../config.js';
 
 let geminiClient: GoogleGenAI | null = null;

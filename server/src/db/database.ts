@@ -12,7 +12,7 @@ import {
   OrderItem, 
   OrderItemStatus, 
   PaymentStatus,
-} from '@shared/types';
+} from '../shared/types.js';
 import { 
   SEED_PROFILES, 
   SEED_VENDORS, 

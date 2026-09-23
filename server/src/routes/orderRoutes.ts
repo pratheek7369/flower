@@ -5,7 +5,7 @@
 import { Router, Request, Response } from 'express';
 import { db } from '../db/database.js';
 import { createOrder, updateOrderItemStatus } from '../services/orderService.js';
-import { UpdateOrderItemStatusSchema } from '@shared/schemas';
+import { UpdateOrderItemStatusSchema } from '../shared/schemas.js';
 
 export const orderRouter = Router();
 

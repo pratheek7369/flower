@@ -3,8 +3,8 @@
 // =========================================================================
 
 import { db } from '../db/database.js';
-import { CreateOrderRequestSchema } from '@shared/schemas';
-import { OrderItemStatus, Order } from '@shared/types';
+import { CreateOrderRequestSchema } from '../shared/schemas.js';
+import { OrderItemStatus, Order } from '../shared/types.js';
 import { generateVaseLifeCareGuide, assessPerishabilityRisk } from './aiService.js';
 import { z } from 'zod';
 

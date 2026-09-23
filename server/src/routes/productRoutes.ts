@@ -4,7 +4,7 @@
 
 import { Router, Request, Response } from 'express';
 import { db } from '../db/database.js';
-import { CatalogFilterSchema, VendorProductSchema } from '@shared/schemas';
+import { CatalogFilterSchema, VendorProductSchema } from '../shared/schemas.js';
 
 export const productRouter = Router();
 

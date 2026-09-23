@@ -6,7 +6,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { config } from '../config.js';
 import { db } from '../db/database.js';
-import { FlowerProduct } from '@shared/types';
+import { FlowerProduct } from '../shared/types.js';
 
 let geminiClient: GoogleGenAI | null = null;
 if (config.geminiApiKey) {

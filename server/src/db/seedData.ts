@@ -4,7 +4,7 @@ import {
   FlowerProduct, 
   Order, 
   OrderItem 
-} from '@shared/types';
+} from '../shared/types.js';
 
 export const SEED_PROFILES: Profile[] = [
   {
