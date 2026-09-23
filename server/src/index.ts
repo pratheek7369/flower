@@ -49,7 +49,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 // Health Check
-app.get('/api/health', (_req: Request, res: Response) => {
+app.get(['/api/health', '/health'], (_req: Request, res: Response) => {
   res.json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -61,26 +61,37 @@ app.get('/api/health', (_req: Request, res: Response) => {
 });
 
 // Live Supabase Health & Connection Check
-app.get('/api/health/supabase', async (_req: Request, res: Response) => {
+app.get(['/api/health/supabase', '/health/supabase'], async (_req: Request, res: Response) => {
   const { testSupabaseConnection } = await import('./db/supabaseClient.js');
   const result = await testSupabaseConnection();
   res.json(result);
 });
 
 // Trigger Supabase Seed Sync
-app.post('/api/supabase/sync', async (_req: Request, res: Response) => {
+app.post(['/api/supabase/sync', '/supabase/sync'], async (_req: Request, res: Response) => {
   const { syncSeedToSupabase } = await import('./db/supabaseClient.js');
   const result = await syncSeedToSupabase();
   res.json(result);
 });
 
-// API Routes
+// API Routes (mounted on both /api/* and /* for fullserver/serverless compatibility)
 app.use('/api/auth', authRouter);
+app.use('/auth', authRouter);
+
 app.use('/api/products', productRouter);
+app.use('/products', productRouter);
+
 app.use('/api/vendors', vendorRouter);
+app.use('/vendors', vendorRouter);
+
 app.use('/api/orders', orderRouter);
+app.use('/orders', orderRouter);
+
 app.use('/api/ai', aiRouter);
+app.use('/ai', aiRouter);
+
 app.use('/api/admin', adminRouter);
+app.use('/admin', adminRouter);
 
 // Serve client in production if built
 const clientDistPath = path.resolve(__dirname, '../../client/dist');
@@ -111,12 +122,14 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   });
 });
 
-app.listen(config.port, () => {
-  console.log(`=======================================================`);
-  console.log(`🌸 FRESH FLOWER PLATFORM SERVER RUNNING ON PORT ${config.port}`);
-  console.log(`   Health Check: http://localhost:${config.port}/api/health`);
-  console.log(`   AI Engine: @google/genai (${config.geminiModel})`);
-  console.log(`=======================================================`);
-});
+if (!process.env.VERCEL) {
+  app.listen(config.port, () => {
+    console.log(`=======================================================`);
+    console.log(`🌸 FRESH FLOWER PLATFORM SERVER RUNNING ON PORT ${config.port}`);
+    console.log(`   Health Check: http://localhost:${config.port}/api/health`);
+    console.log(`   AI Engine: @google/genai (${config.geminiModel})`);
+    console.log(`=======================================================`);
+  });
+}
 
 export default app;
