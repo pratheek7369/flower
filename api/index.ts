@@ -7,9 +7,11 @@ let appInstance: any = null;
 export default async function handler(req: any, res: any) {
   if (!appInstance) {
     try {
+      // @ts-ignore
       const serverModule = await import('../server/dist/index.js');
       appInstance = serverModule.default || serverModule;
     } catch {
+      // @ts-ignore
       const serverModule = await import('../server/src/index.js');
       appInstance = serverModule.default || serverModule;
     }
